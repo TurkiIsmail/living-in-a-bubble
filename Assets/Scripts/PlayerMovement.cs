@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController characterController;
 
     private bool canMove = true;
+    public bool isRuning;
     public bool isCurrentlyShifting = false; // Tracks running status
     private float targetHeight; // Target height for crouching/standing
 
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
 {
+    
     Vector3 forward = transform.TransformDirection(Vector3.forward);
     Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -73,10 +75,17 @@ public class PlayerMovement : MonoBehaviour
         isCurrentlyShifting = false; // Stop running if grounded and shift is not held
     }
 
+
     float currentSpeed = isCrouching ? crouchSpeed : (isCurrentlyShifting ? shiftSpeed : walkSpeed);
+    if(currentSpeed==walkSpeed){
+        isRuning=true;
+    }
+    else{
+        isRuning=false;
+    }
     float curSpeedX = canMove ? currentSpeed * Input.GetAxis("Vertical") : 0;
     float curSpeedY = canMove ? currentSpeed * Input.GetAxis("Horizontal") : 0;
-
+    
     // Preserve Y-axis movement
     float movementDirectionY = moveDirection.y;
 
