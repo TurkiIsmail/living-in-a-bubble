@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - flashlight
+  - Image
   layers:
   - Default
   - TransparentFX

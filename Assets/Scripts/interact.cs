@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class interact : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class interact : MonoBehaviour
     private Transform _cameraTransform;
     private GameObject _currentObject; // Keeps track of the currently outlined object
     public GameObject flashlight;
+
+    public GameObject point;
+    public GameObject hand;
 
     [Header("Image Interaction")]
     public Canvas fullScreenCanvas; // Canvas for full-screen display
@@ -58,42 +62,55 @@ public class interact : MonoBehaviour
                 ClearOutline(); // Remove outline from the previously hit object
                 ApplyOutline(hitObject, true); // Add outline to the newly hit object
                 _currentObject = hitObject;
+               
+
+                point.SetActive(false);
+                hand.SetActive(true);
             }
+         
         }
         else
         {
             // Clear the outline if the ray doesn't hit anything
             ClearOutline();
+             point.SetActive(true);
+                hand.SetActive(false);
         }
     }
 
-    void TryInteractWithObject()
+    
+void TryInteractWithObject()
+{
+    // Cast a ray from the camera's position forward
+    Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+    RaycastHit hit;
+
+    if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Image"))
     {
-        // Cast a ray from the camera's position forward
-        Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-        RaycastHit hit;
+        GameObject hitObject = hit.collider.gameObject;
+        Renderer renderer = hitObject.GetComponent<Renderer>();
 
-        if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Image"))
+        if (renderer != null)
         {
-            GameObject hitObject = hit.collider.gameObject;
-            Renderer renderer = hitObject.GetComponent<Renderer>();
+            // Store the original material and object
+            originalMaterial = renderer.material;
+            originalObject = hitObject;
 
-            if (renderer != null)
+            // Extract the texture from the clicked object's material
+            Texture clickedTexture = renderer.material.mainTexture;
+
+            // Display the texture on the full-screen RawImage
+            RawImage fullScreenRawImage = fullScreenPlane.GetComponent<RawImage>();
+            if (fullScreenRawImage != null)
             {
-                // Store the original material and object
-                originalMaterial = renderer.material;
-                originalObject = hitObject;
-
-                // Display the full-screen image
-                fullScreenPlane.SetActive(true);
-                Renderer fullScreenRenderer = fullScreenPlane.GetComponent<Renderer>();
-                if (fullScreenRenderer != null)
-                {
-                    fullScreenRenderer.material = originalMaterial; // Use the material of the clicked object
-                }
+                fullScreenRawImage.texture = clickedTexture; // Use the texture from the material
             }
+
+            // Enable the full-screen plane
+            fullScreenPlane.SetActive(true);
         }
     }
+}
 
     void ExitFullScreen()
     {
