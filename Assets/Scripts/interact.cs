@@ -107,21 +107,21 @@ public class interact : MonoBehaviour
             originalObject = null;
         }
     }
-     void FlashlightPickup()
+    void FlashlightPickup()
     {
         // Cast a ray from the camera's position forward
         Ray ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.tag == "flashlight") 
+        if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.tag == "flashlight")
         {
             GameObject hitObject = hit.collider.gameObject;
 
-           Destroy(hitObject);
-           flashlight.SetActive(true);
-            
+            Destroy(hitObject);
+            flashlight.SetActive(true);
+
         }
-        
+
     }
 
     void ClearOutline()

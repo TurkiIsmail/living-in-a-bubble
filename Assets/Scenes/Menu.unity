@@ -470,6 +470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: House
       objectReference: {fileID: 0}
+    - target: {fileID: 6262220720897410001, guid: 0e9705b4de5ef0a4a8881c39a677eaf7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8294590269021141546, guid: 0e9705b4de5ef0a4a8881c39a677eaf7, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.817
@@ -622,6 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c485575d1da8a4cb88ea6e8ace865c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LM: {fileID: 0}
 --- !u!1 &803817055
 GameObject:
   m_ObjectHideFlags: 0

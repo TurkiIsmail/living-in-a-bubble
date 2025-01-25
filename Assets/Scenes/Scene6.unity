@@ -3175,6 +3175,7 @@ MonoBehaviour:
   crouchHeight: 0.5
   crouchSpeed: 3
   crouchTransitionSpeed: 15
+  isRuning: 0
   isCurrentlyShifting: 0
 --- !u!143 &1524413906
 CharacterController:
@@ -3220,7 +3221,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Size: {x: 1.1, y: 2.1, z: 1.1}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &1629343839 stripped
 GameObject:
