@@ -1,20 +1,36 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class AnimGen : MonoBehaviour
 {
     public GameObject boycamm;
+    public GameObject boy;
+    public GameObject boy2;
+    public GameObject boycamm2;
     public GameObject momcamm;
     public GameObject pan;
     public TextMeshProUGUI txt;
     int comp=0;
     public GameObject op;
+    public Animator anim;
     void Start()
     {
+        StartCoroutine(DelayedStartRoutine());
+        anim = GetComponent<Animator>();
+    }
+    IEnumerator DelayedStartRoutine()
+    {
+        // Wait for 1.5 seconds.
+        yield return new WaitForSeconds(1.5f);
+
+        // Execute your original Start logic.
         boycamm.SetActive(true);
+        boy.SetActive(true);
+        boy2.SetActive(false);
         momcamm.SetActive(false);
         pan.SetActive(true);
-        txt.text = "Why can’t I join them mum i want to play ? ";
+        txt.text = "Why can’t I join them mum I want to play?";
         comp++;
     }
 
@@ -29,22 +45,26 @@ public class AnimGen : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && comp == 2)
              {
-              boycamm.SetActive(true);
+              boycamm2.SetActive(true);
               momcamm.SetActive(false);
-              txt.text = "Why does everyone outside seem fine if they’re sick?";
+            boy.SetActive(false);
+            boy2.SetActive(true);
+            txt.text = "Why does everyone outside seem fine if they’re sick?";
               comp++;
              }
         else if (Input.GetKeyDown(KeyCode.Space) && comp == 3)
              {
-               boycamm.SetActive(false);
+               boycamm2.SetActive(false);
                momcamm.SetActive(true);
-               txt.text = "I said you're safe here , know take your pills";
+               txt.text = "I said you're safe here , now take your pills";
                comp++;
              }
         else if (Input.GetKeyDown(KeyCode.Space) && comp == 4)
         {
-            boycamm.SetActive(false);
+            boycamm2.SetActive(false);
             momcamm.SetActive(true);
+            boy.SetActive(false);
+            boy2.SetActive(true);
             op.SetActive(true);
         }
 

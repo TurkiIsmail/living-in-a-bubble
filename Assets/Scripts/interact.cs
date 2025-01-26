@@ -64,8 +64,8 @@ public class interact : MonoBehaviour
                 _currentObject = hitObject;
                
 
-                point.SetActive(false);
-                hand.SetActive(true);
+                //point.SetActive(false);
+                //hand.SetActive(true);
             }
          
         }
@@ -73,8 +73,8 @@ public class interact : MonoBehaviour
         {
             // Clear the outline if the ray doesn't hit anything
             ClearOutline();
-             point.SetActive(true);
-                hand.SetActive(false);
+                //point.SetActive(true);
+                //hand.SetActive(false);
         }
     }
 

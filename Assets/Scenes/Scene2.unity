@@ -434,7 +434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Presse Enter
+  m_text: Presse space
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 95d5cd80d69e4a8418e105f71aa78b6e, type: 2}
   m_sharedMaterial: {fileID: 967912493714568377, guid: 95d5cd80d69e4a8418e105f71aa78b6e, type: 2}
