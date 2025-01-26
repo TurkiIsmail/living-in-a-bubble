@@ -750,7 +750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2057139976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I'm feeling like living in bubble
+  m_text: "Every day feels the same , I feel like I\u2019m living in a bubble."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 95d5cd80d69e4a8418e105f71aa78b6e, type: 2}
   m_sharedMaterial: {fileID: 967912493714568377, guid: 95d5cd80d69e4a8418e105f71aa78b6e, type: 2}
