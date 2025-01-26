@@ -42,4 +42,8 @@ public class MicValue : MonoBehaviour
            CanvasMic.SetActive(true);
         }
     }
+    private void OnTriggerExit(Collider other) {
+        mc.gameObject.SetActive(true);
+           CanvasMic.SetActive(true);
+    }
 }
