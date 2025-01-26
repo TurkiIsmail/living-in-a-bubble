@@ -4,7 +4,8 @@ public class dooropen : MonoBehaviour
 {
     public float openAngle = -90f; // Angle to open the door
     public float closeAngle = 0f; // Angle to close the door
-    public float doorSpeed = 2f;  // Speed of door movement
+    public float doorSpeed = 2f; 
+    AudioSource DooropenSound; // Speed of door movement
 
     public bool isOpen = false; // Tracks door state
     private Quaternion closedRotation;
@@ -16,6 +17,7 @@ public class dooropen : MonoBehaviour
         closedRotation = transform.rotation;
         // Calculate the open rotation
         openRotation = Quaternion.Euler(transform.eulerAngles + Vector3.up * openAngle);
+        DooropenSound=GetComponent<AudioSource>();
     }
 
     void Update()
@@ -28,6 +30,10 @@ public class dooropen : MonoBehaviour
     // Public method to toggle the door state
     public void ToggleDoor()
     {
-        isOpen = !isOpen; // Toggle door state
+        isOpen = !isOpen;
+        
+        if(isOpen==true){
+            DooropenSound.Play();
+        } // Toggle door state
     }
 }

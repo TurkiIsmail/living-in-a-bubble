@@ -43,7 +43,7 @@ public class MicrophoneLoudnessDetector : MonoBehaviour
         }
     }
 
-    float GetLoudnessFromMicrophone()
+    public float GetLoudnessFromMicrophone()
     {
         // Get audio data from the microphone
         float[] data = new float[256];
