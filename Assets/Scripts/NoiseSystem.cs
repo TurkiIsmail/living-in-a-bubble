@@ -41,7 +41,7 @@ public class NoiseSystem : MonoBehaviour
         UpdateNoiseStage();
     
        
-         switch (currentNoiseStage)
+       /*   switch (currentNoiseStage)
         {
             case 0:
                print("Noise Level: Low");
@@ -55,7 +55,7 @@ public class NoiseSystem : MonoBehaviour
             case 3:
                 GameOver();
                 break;
-        }  
+        }   */
 
         if (Input.GetKeyDown(KeyCode.F))
         {
