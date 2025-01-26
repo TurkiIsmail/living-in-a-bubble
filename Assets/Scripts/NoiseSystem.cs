@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class NoiseSystem : MonoBehaviour
@@ -22,7 +23,7 @@ public class NoiseSystem : MonoBehaviour
   public Image image1;
     public Image image2;
     public Image image3;
-
+    public GameObject mom;
     void Start()
     {
         mv = mv.GetComponent<PlayerMovement>();
@@ -74,6 +75,7 @@ public class NoiseSystem : MonoBehaviour
                 SetImageProperties(image1, 1f, redColor);
                 SetImageProperties(image2, 1f, redColor);
                 SetImageProperties(image3, 1f, redColor);
+                GameOver();
                 break;
         } 
 
@@ -111,8 +113,10 @@ public class NoiseSystem : MonoBehaviour
 
     void GameOver()
     {
-       
+
         // Add game over logic here
+        mom.GetComponent<AISIMPLE>().enabled = true;
+        mom.GetComponent<NavMeshAgent>().enabled = true;
         currentNoiseLevel = 0f;
         currentNoiseStage = 0;
     }
