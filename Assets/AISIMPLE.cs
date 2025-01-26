@@ -7,10 +7,12 @@ public class AISIMPLE : MonoBehaviour
     public GameObject player;
     public float speed = 1.3f;
     public float stopDistance = 2f; // Distance at which the object stops moving
+    Animator animator;
 
     void Start()
     {
         // Optional: Initialization logic here
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -26,6 +28,7 @@ public class AISIMPLE : MonoBehaviour
 
             // Move towards the player
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            animator.SetBool("mov", true);
         }
         else
         {

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class interact : MonoBehaviour
@@ -9,7 +10,7 @@ public class interact : MonoBehaviour
     private Transform _cameraTransform;
     private GameObject _currentObject; // Keeps track of the currently outlined object
     public GameObject flashlight;
-
+    public GameObject mom;
     public GameObject point;
     public GameObject hand;
     //public GameObject TextE;
@@ -20,8 +21,16 @@ public class interact : MonoBehaviour
     private Material originalMaterial; // Stores the original material of the interacted object
     private GameObject originalObject; // Tracks the original game object
 
+    public TextMeshProUGUI txt;
+    public GameObject pan;
+    public TextMeshProUGUI txt2;
+    public GameObject pan2;
+
+    AudioSource aud;
+
     void Start()
     {
+        aud = GetComponent<AudioSource>();
         // Reference the main camera
         _cameraTransform = Camera.main.transform;
 
@@ -94,8 +103,11 @@ void TryInteractWithObject()
     {
         GameObject hitObject = hit.collider.gameObject;
         Renderer renderer = hitObject.GetComponent<Renderer>();
+            txt.text = "I need to know the story from my dad";
+            txt2.text = "Find dad";
+            pan2.SetActive(true);
 
-        if (renderer != null)
+            if (renderer != null)
         {
             // Store the original material and object
             originalMaterial = renderer.material;
@@ -115,7 +127,39 @@ void TryInteractWithObject()
             fullScreenPlane.SetActive(true);
         }
     }
-    if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Door"))
+
+        if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Image2"))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            Renderer renderer = hitObject.GetComponent<Renderer>();
+            txt.text = "";
+            txt2.text = "";
+            pan2.SetActive(false);
+            aud.Play();
+            mom.GetComponent<AISIMPLE>().enabled = true;
+            mom.GetComponent<NavMeshAgent>().enabled = true;
+            if (renderer != null)
+            {
+                // Store the original material and object
+                originalMaterial = renderer.material;
+                originalObject = hitObject;
+
+                // Extract the texture from the clicked object's material
+                Texture clickedTexture = renderer.material.mainTexture;
+
+                // Display the texture on the full-screen RawImage
+                RawImage fullScreenRawImage = fullScreenPlane.GetComponent<RawImage>();
+                if (fullScreenRawImage != null)
+                {
+                    fullScreenRawImage.texture = clickedTexture; // Use the texture from the material
+                }
+
+                // Enable the full-screen plane
+                fullScreenPlane.SetActive(true);
+            }
+        }
+
+        if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Door"))
     {
         GameObject hitObject = hit.collider.gameObject;
        dooropen OpenDoor=hitObject.GetComponent<dooropen>(); 
@@ -125,9 +169,9 @@ void TryInteractWithObject()
     
         // Call the ToggleDoor method to open/close the door
         OpenDoor.ToggleDoor();
+    }
     
     }
-}
 
     void ExitFullScreen()
     {

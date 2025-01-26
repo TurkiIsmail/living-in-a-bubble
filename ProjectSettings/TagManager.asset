@@ -9,6 +9,8 @@ TagManager:
   - Image
   - Door
   - micZone
+  - Pres
+  - Image2
   layers:
   - Default
   - TransparentFX
