@@ -25,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     public bool IsRuning = false; // Renamed from 'isRuning'
     public bool isCurrentlyShifting = false;
     private float targetHeight;
+       public float calmDownTime = 0.5f; // Time to wait between steps
+
+    private bool canPlay = true;
+
+
+    AudioSource Run;
 
     void Start()
     {
@@ -32,10 +38,21 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         targetHeight = defaultHeight;
+        Run = GetComponent<AudioSource>();
     }
-
+ IEnumerator CalmDown()
+    {
+        canPlay = false; // Prevent further execution
+        yield return new WaitForSeconds(calmDownTime); // Wait for calmDownTime seconds
+        canPlay = true; // Allow execution again
+    }
    void Update()
     {
+           if (IsRuning && canPlay)
+        {
+            Run.Play();
+            StartCoroutine(CalmDown());
+        } 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -100,7 +117,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Check if player is moving
         
-        IsRuning = (curSpeedX != 0 || curSpeedY != 0) && !isCrouching &&!isCurrentlyShifting;        
+        IsRuning = (curSpeedX != 0 || curSpeedY != 0) && !isCrouching &&!isCurrentlyShifting; 
+
+  
 
 
 
