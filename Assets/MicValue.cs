@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.LowLevelPhysics;
 using UnityEngine.UI;
 
 public class MicValue : MonoBehaviour
 {
     public MicrophoneLoudnessDetector mc;
+        public Image FillImage; // Reference to the Fill area of the slider
+
     float loudness;
     public GameObject CanvasMic;
+    public Color MaxColor = Color.red;
    public Slider Slider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,10 +24,14 @@ public class MicValue : MonoBehaviour
     {
     
         loudness=mc.GetLoudnessFromMicrophone()*10000;
-        Slider.value=loudness;
-        if(Slider.value>Slider.maxValue)
+     
+        if(Slider.value>=Slider.maxValue)
         {
-            print("you gone !");
+           Slider.value=120;
+           FillImage.color = MaxColor;
+        }
+        else{
+               Slider.value=loudness;
         }
     
     }
