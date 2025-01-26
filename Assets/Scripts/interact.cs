@@ -12,7 +12,7 @@ public class interact : MonoBehaviour
 
     public GameObject point;
     public GameObject hand;
-    public GameObject TextE;
+    //public GameObject TextE;
 
     [Header("Image Interaction")]
     public Canvas fullScreenCanvas; // Canvas for full-screen display
@@ -68,7 +68,7 @@ public class interact : MonoBehaviour
 
                 point.SetActive(false);
                 hand.SetActive(true);
-                TextE.SetActive(true);
+                //TextE.SetActive(true);
             }
          
         }
@@ -78,7 +78,7 @@ public class interact : MonoBehaviour
             ClearOutline();
             point.SetActive(true);
             hand.SetActive(false);
-            TextE.SetActive(false);
+            //TextE.SetActive(false);
 
         }
     }
