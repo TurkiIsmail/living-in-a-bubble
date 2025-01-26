@@ -8,6 +8,7 @@ TagManager:
   - flashlight
   - Image
   - Door
+  - micZone
   layers:
   - Default
   - TransparentFX
