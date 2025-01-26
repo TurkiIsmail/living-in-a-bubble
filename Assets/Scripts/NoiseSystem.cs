@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoiseSystem : MonoBehaviour
 { public float maxNoiseLevel = 100f;
     public float noiseDecayRate = 10f;
     private float currentNoiseLevel = 0f;
     private int currentNoiseStage = 0;
+
 
     [Header("Noise Values Per Action")]
    
@@ -17,7 +19,9 @@ public class NoiseSystem : MonoBehaviour
     public Flashlight fl; 
     public bool isRunning = false;
     public bool isFlashlightOn = false;
-
+  public Image image1;
+    public Image image2;
+    public Image image3;
 
     void Start()
     {
@@ -41,26 +45,42 @@ public class NoiseSystem : MonoBehaviour
         UpdateNoiseStage();
     
        
-       /*   switch (currentNoiseStage)
+        switch (currentNoiseStage)
         {
             case 0:
-               print("Noise Level: Low");
+               
+                SetImageProperties(image1, 0.3f, Color.white);
+                SetImageProperties(image2, 0.3f, Color.white);
+                SetImageProperties(image3, 0.3f, Color.white);
                 break;
+
             case 1:
-                print("Noise Level: Medium");
+              
+                SetImageProperties(image1, 1f, Color.white);
+                SetImageProperties(image2, 0.3f, Color.white);
+                SetImageProperties(image3, 0.3f, Color.white);
                 break;
+
             case 2:
-               print("Noise Level: High");
+               
+                SetImageProperties(image1, 1f, Color.white);
+                SetImageProperties(image2, 1f, Color.white);
+                SetImageProperties(image3, 0.3f, Color.white);
                 break;
+
             case 3:
-                GameOver();
+              
+                Color redColor = Color.red;
+                SetImageProperties(image1, 1f, redColor);
+                SetImageProperties(image2, 1f, redColor);
+                SetImageProperties(image3, 1f, redColor);
                 break;
-        }   */
+        } 
 
         if (Input.GetKeyDown(KeyCode.F))
         {
             isFlashlightOn = !isFlashlightOn;
-            Debug.Log($"Flashlight is now {(isFlashlightOn ? "ON" : "OFF")}");
+            
         }
     }
 
@@ -91,9 +111,38 @@ public class NoiseSystem : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("DEAD - Noise Level Too High!");
+       
         // Add game over logic here
         currentNoiseLevel = 0f;
         currentNoiseStage = 0;
+    }
+     public void SetImageProperties(float opacity, Color color)
+    {
+        // Clamp opacity between 0 and 1
+        opacity = Mathf.Clamp(opacity, 0f, 1f);
+
+        // Set properties for each image
+        if (image1 != null)
+        {
+            SetImageProperties(image1, opacity, color);
+        }
+
+        if (image2 != null)
+        {
+            SetImageProperties(image2, opacity, color);
+        }
+
+        if (image3 != null)
+        {
+            SetImageProperties(image3, opacity, color);
+        }
+    }
+
+    private void SetImageProperties(Image img, float opacity, Color color)
+    {
+        // Update the color with the new opacity
+        Color newColor = color;
+        newColor.a = opacity;
+        img.color = newColor;
     }
 }

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class interact : MonoBehaviour
 
     public GameObject point;
     public GameObject hand;
+    public GameObject TextE;
 
     [Header("Image Interaction")]
     public Canvas fullScreenCanvas; // Canvas for full-screen display
@@ -66,6 +68,7 @@ public class interact : MonoBehaviour
 
                 point.SetActive(false);
                 hand.SetActive(true);
+                TextE.SetActive(true);
             }
          
         }
@@ -73,8 +76,10 @@ public class interact : MonoBehaviour
         {
             // Clear the outline if the ray doesn't hit anything
             ClearOutline();
-             point.SetActive(true);
-                hand.SetActive(false);
+            point.SetActive(true);
+            hand.SetActive(false);
+            TextE.SetActive(false);
+
         }
     }
 
@@ -109,6 +114,18 @@ void TryInteractWithObject()
             // Enable the full-screen plane
             fullScreenPlane.SetActive(true);
         }
+    }
+    if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Door"))
+    {
+        GameObject hitObject = hit.collider.gameObject;
+       dooropen OpenDoor=hitObject.GetComponent<dooropen>(); 
+       
+           // Enable the full-screen plane
+       
+    
+        // Call the ToggleDoor method to open/close the door
+        OpenDoor.ToggleDoor();
+    
     }
 }
 

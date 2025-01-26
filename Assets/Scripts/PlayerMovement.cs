@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Camera playerCamera;
     public float walkSpeed =  6f;
     public float shiftSpeed = 3f;
-    public float jumpPower = 7f;
+   
     public float gravity = 20f;
     public float lookSpeed = 2f; 
     public float lookXLimit = 90f;
@@ -108,10 +108,7 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.y = movementDirectionY;
 
         // Jump logic
-        if (Input.GetButton("Jump") && canMove && isGrounded)
-        {
-            moveDirection.y = jumpPower;
-        }
+       
 
         // Apply gravity if not grounded
         if (!isGrounded)

@@ -34,7 +34,7 @@ public class MicrophoneLoudnessDetector : MonoBehaviour
         if (audioSource.clip != null)
         {
             float loudness = GetLoudnessFromMicrophone()*10000;
-            Debug.Log("Loudness: " + loudness);
+       
 
             if (loudness > loudnessThreshold)
             {
