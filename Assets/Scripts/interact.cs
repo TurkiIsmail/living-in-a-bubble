@@ -21,9 +21,9 @@ public class interact : MonoBehaviour
     private Material originalMaterial; // Stores the original material of the interacted object
     private GameObject originalObject; // Tracks the original game object
 
-    public TextMeshProUGUI txt;
+    public TextMeshProUGUI txtBottom;
     public GameObject pan;
-    public TextMeshProUGUI txt2;
+    public TextMeshProUGUI txtTop;
     public GameObject pan2;
 
     AudioSource aud;
@@ -103,9 +103,19 @@ void TryInteractWithObject()
     {
         GameObject hitObject = hit.collider.gameObject;
         Renderer renderer = hitObject.GetComponent<Renderer>();
-            txt.text = "I need to know the story from my dad";
-            txt2.text = "Find dad";
-            pan2.SetActive(true);
+        if (hitObject.name == "Image1")
+            {
+                txtBottom.text = "I need to know the story from my dad";
+                txtTop.text = "Find dad";
+                pan2.SetActive(true);
+            }
+        if (hitObject.name == "Image2")
+            {
+                txtBottom.text = "GETOUTTTT";
+                txtTop.text = "Find dad";
+                pan2.SetActive(true);
+            }
+         
 
             if (renderer != null)
         {
@@ -128,36 +138,7 @@ void TryInteractWithObject()
         }
     }
 
-        if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Image2"))
-        {
-            GameObject hitObject = hit.collider.gameObject;
-            Renderer renderer = hitObject.GetComponent<Renderer>();
-            txt.text = "";
-            txt2.text = "";
-            pan2.SetActive(false);
-            aud.Play();
-            mom.GetComponent<AISIMPLE>().enabled = true;
-            mom.GetComponent<NavMeshAgent>().enabled = true;
-            if (renderer != null)
-            {
-                // Store the original material and object
-                originalMaterial = renderer.material;
-                originalObject = hitObject;
-
-                // Extract the texture from the clicked object's material
-                Texture clickedTexture = renderer.material.mainTexture;
-
-                // Display the texture on the full-screen RawImage
-                RawImage fullScreenRawImage = fullScreenPlane.GetComponent<RawImage>();
-                if (fullScreenRawImage != null)
-                {
-                    fullScreenRawImage.texture = clickedTexture; // Use the texture from the material
-                }
-
-                // Enable the full-screen plane
-                fullScreenPlane.SetActive(true);
-            }
-        }
+      
 
         if (Physics.Raycast(ray, out hit, interactRange, interactableLayer) && hit.collider.CompareTag("Door"))
     {
